@@ -1,0 +1,7 @@
+/*C1*/SET SCHEMA SYSTEM_LOBS
+INSERT INTO BLOCKS VALUES(0,2147483647,0)
+COMMIT
+/*C2*/SET SCHEMA PUBLIC
+create table transaction (id varchar(255) not null, account_number integer not null, name varchar(255), date_time timestamp, value numeric(19,2), primary key (id))
+INSERT INTO TRANSACTION VALUES('55936604-91b8-4a4a-a4ef-36bdc8626f13',1000,'maria joaquina','2020-04-24 00:30:51.642000',200.00)
+COMMIT

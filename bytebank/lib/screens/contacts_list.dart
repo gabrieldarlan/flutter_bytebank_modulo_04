@@ -2,6 +2,7 @@ import 'package:bytebank/components/progress.dart';
 import 'package:bytebank/dao/contact_dao.dart';
 import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/screens/contact_form.dart';
+import 'package:bytebank/screens/transaction_form.dart';
 import 'package:flutter/material.dart';
 
 class ContactList extends StatefulWidget {
@@ -35,7 +36,16 @@ class _ContactListState extends State<ContactList> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final Contact contact = contacts[index];
-                  return _ContactItem(contact);
+                  return _ContactItem(
+                    contact,
+                    onclick: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => TransactionForm(contact),
+                        ),
+                      );
+                    },
+                  );
                 },
                 itemCount: contacts.length,
               );
@@ -60,13 +70,18 @@ class _ContactListState extends State<ContactList> {
 
 class _ContactItem extends StatelessWidget {
   final Contact contact;
+  final Function onclick;
 
-  _ContactItem(this.contact);
+  _ContactItem(
+    this.contact, {
+    @required this.onclick,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+        onTap: () => onclick(),
         title: Text(
           contact.name,
           style: TextStyle(

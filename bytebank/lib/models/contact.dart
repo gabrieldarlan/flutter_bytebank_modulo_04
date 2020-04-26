@@ -8,8 +8,19 @@ class Contact {
     this.name,
     this.accountNumber,
   );
+
+  Contact.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        name = json['name'],
+        accountNumber = json['accountNumber'];
+
   @override
   String toString() {
     return '{Id: $id, Name: $name, AccountNumber: $accountNumber}';
   }
+
+    Map<String, dynamic> toJson() => {
+        'name': name,
+        'accountNumber': accountNumber,
+      };
 }
